@@ -6,13 +6,22 @@
 #include "bubblesort.h"
 using namespace std;
 
+void writeFile(int size, int* data) {
+    ofstream ofs;
+    ofs.open("output.txt");
+    for (int i = 0; i < size; i++) {
+        ofs << data[i] << endl;
+    }
+    ofs.close();
+}
+
 void sortArray(int type, int count, int* numbers) {
     // for (int i = 0; i < count; i++) {
     //     cout << numbers[i] << endl;
     // }
 
     if (type == 0) {
-        // Bubble 
+        writeFile(count, bubbleSort(numbers));
     } else if (type == 1) {
         // Heap
     } else if (type == 2) {
@@ -25,6 +34,7 @@ void sortArray(int type, int count, int* numbers) {
 
     return;
 }
+
 
 int* parseFile(string filename) {
     ifstream fin;
