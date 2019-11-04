@@ -3,12 +3,26 @@
 
 #include <fstream>
 #include <string>
+#include "bubblesort.h"
 using namespace std;
 
 void sortArray(int type, int count, int* numbers) {
-    for (int i = 0; i < count; i++) {
-        cout << numbers[i] << endl;
+    // for (int i = 0; i < count; i++) {
+    //     cout << numbers[i] << endl;
+    // }
+
+    if (type == 0) {
+        // Bubble 
+    } else if (type == 1) {
+        // Heap
+    } else if (type == 2) {
+        // Merge 
+    } else if (type == 3) {
+        // Quick
+    } else {
+        // Invalid
     }
+
     return;
 }
 
