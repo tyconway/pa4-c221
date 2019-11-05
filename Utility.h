@@ -21,7 +21,7 @@ void sortArray(int type, int count, int* numbers) {
     // }
 
     if (type == 0) {
-        writeFile(count, bubbleSort(numbers));
+        writeFile(count, bubbleSort(count, numbers));
     } else if (type == 1) {
         // Heap
     } else if (type == 2) {
