@@ -6,6 +6,7 @@
 #include <exception>
 #include "bubblesort.h"
 #include "heapsort.h"
+#include "mergesort.h"
 using namespace std;
 
 void writeFile(int size, int* data) {
@@ -27,7 +28,8 @@ void sortArray(int type, int count, int* numbers) {
         } else if (type == 1) {
             writeFile(count, heapSort(count, numbers));
         } else if (type == 2) {
-            // Merge 
+            writeFile(count, mergeSort(count, numbers));
+        } else if (type == 2) {
         } else if (type == 3) {
             // Quick
         } else {
