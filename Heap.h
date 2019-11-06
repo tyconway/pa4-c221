@@ -2,10 +2,11 @@
 #define HEAP_H
 
 #include <exception>
+#include "Exception.h"
 using namespace std;
 
 template <class Type>
-void swap ( Type &v1, Type &v2 )
+void swapHeap ( Type &v1, Type &v2 )
 {
 	Type v3 = v1;
 	v1 = v2;
@@ -44,7 +45,7 @@ private:
 	{
 		while ( i > 0 && heap [ i ] < heap [ parent ( i ) ] ) // while not the root
 		{
-			swap ( heap [ i ], heap [ parent ( i ) ] );
+			swapHeap ( heap [ i ], heap [ parent ( i ) ] );
 			i = parent ( i );
 		}
 	}
@@ -61,7 +62,7 @@ private:
 
 			if ( heap [ i ] > heap [ minChild ] )
 			{
-				swap ( heap [ i ], heap [ minChild ] );
+				swapHeap ( heap [ i ], heap [ minChild ] );
 				i = minChild;
 			}
 			else
@@ -76,7 +77,7 @@ public:
 	{
 		int i;
 
-		n = num - 1;
+		n = num;
 		capacity = num;
 		heap = new Type [ num ];
 
@@ -112,11 +113,11 @@ public:
 		return n;
 	}
 
-	void insertElement ( Type val ) throw ( exception )
+	void insertElement ( Type val ) 
 	{
 		if ( n >= capacity )
 		{
-			throw exception ( "Heap is full" );
+			throw EmptyHeap();
 		}
 
 		heap [ n ] = val;
@@ -124,20 +125,20 @@ public:
 		upheap ( n - 1 );
 	}
 
-	Type minElement ( void ) throw ( exception )
+	Type minElement ( void )
 	{
 		if ( isEmpty ( ) )
 		{
-			throw exception ( "Heap is empty" );
+			throw EmptyHeap();
 		}
 		return heap [ 0 ];
 	}
 
-	Type removeMin ( void ) throw ( exception )
+	Type removeMin ( void )
 	{
 		if ( isEmpty ( ) )
 		{
-			throw exception ( "Heap is empty" );
+			throw EmptyHeap();
 		}
 		Type rvalue = heap [ 0 ];
 		heap [ 0 ] = heap [ n - 1 ];

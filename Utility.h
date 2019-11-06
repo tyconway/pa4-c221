@@ -3,7 +3,9 @@
 
 #include <fstream>
 #include <string>
+#include <exception>
 #include "bubblesort.h"
+#include "heapsort.h"
 using namespace std;
 
 void writeFile(int size, int* data) {
@@ -19,18 +21,23 @@ void sortArray(int type, int count, int* numbers) {
     // for (int i = 0; i < count; i++) {
     //     cout << numbers[i] << endl;
     // }
-
-    if (type == 0) {
-        writeFile(count, bubbleSort(count, numbers));
-    } else if (type == 1) {
-        // Heap
-    } else if (type == 2) {
-        // Merge 
-    } else if (type == 3) {
-        // Quick
-    } else {
-        // Invalid
+    try {
+        if (type == 0) {
+            writeFile(count, bubbleSort(count, numbers));
+        } else if (type == 1) {
+            writeFile(count, heapSort(count, numbers));
+        } else if (type == 2) {
+            // Merge 
+        } else if (type == 3) {
+            // Quick
+        } else {
+            // Invalid
+        }
     }
+    catch (const exception& e)
+	{
+		cerr << "\nException: " << e.what() << '\n';
+	} 
 
     return;
 }
