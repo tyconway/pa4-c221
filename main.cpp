@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
             sortArray(type, count, numbers);
     } else if (argc == 2) {
         cout << "Parsing " << argv[1] << " and sorting numbers:\n";
+        cout << "WARNING: Not yet implemented.\n";
     } else {
         cout << "Too many inputs. Please use only one.\n";
     }
