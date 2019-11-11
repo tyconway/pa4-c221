@@ -102,4 +102,43 @@ void sortFromFile(string filename) {
     sortArray(type, count, numbers);
 }
 
+enum listType { random, increasing, decreasing };
+
+void timedSort(int n = 1000, string selectedType = "random") {
+    // Try to match type
+    listType type;
+    if (selectedType == "random") {
+        type = random;
+    } else if (selectedType == "increasing") {
+        type = increasing;
+    } else if (selectedType == "decreasing") {
+        type = decreasing;
+    } else {
+        cout << "Bad type.";
+        return;
+    }
+    // generate requested type
+    int* numbers = new int[n];
+    switch(type) {
+        case random:
+            for (int i = 0; i < n; i++) {
+                int r = (rand() % n);
+                numbers[i] = r;
+            }
+            break;
+        case increasing:
+            for (int i = 0; i < n; i++) {
+                numbers[i] = i;
+            }
+            break;
+        case decreasing:
+            for (int i = 0; i < n; i++) {
+                numbers[i] = n - i;
+            }
+            break;
+    }
+    // time trials
+    // generate log_csv
+}
+
 #endif
