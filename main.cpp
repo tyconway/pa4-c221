@@ -1,3 +1,5 @@
+#include <ctime>
+#include <cstdlib>
 #include <iostream>
 #include "Utility.h"
 using namespace std;
@@ -5,10 +7,11 @@ using namespace std;
 int main(int argc, char** argv) {
     cout << endl;
 
+    srand(time(0));
     if (argc == 1) {
-        cout << "Program expected a file input:\n"
-             << "./a.out <filename.txt>\n"
-             << "Filename \"numbers.txt\" assumed and proceeding...\n";
+        // cout << "Program expected a file input:\n"
+        //      << "./a.out <filename.txt>\n"
+        //      << "Filename \"numbers.txt\" assumed and proceeding...\n";
             int* data = parseFile("numbers.txt");
             int type = data[0];
             int count = data[1];

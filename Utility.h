@@ -7,6 +7,7 @@
 #include "bubblesort.h"
 #include "heapsort.h"
 #include "mergesort.h"
+#include "quicksort.h"
 using namespace std;
 
 void writeFile(int size, int* data) {
@@ -16,6 +17,29 @@ void writeFile(int size, int* data) {
         ofs << data[i] << endl;
     }
     ofs.close();
+}
+
+void printArr(int count, int* arr) {
+    cout << "[Arr]:\n";
+    for (int i = 0; i < count; i++) {
+        cout << arr[i] << endl;
+    }
+}
+
+vector<int>* arrToVec(int count, int* numbers) {
+    vector<int> *converted = new vector<int>();
+    for (int i = 0; i < count; i++) {
+        converted->push_back(numbers[i]);
+    }
+    return converted;
+}
+
+int* vecToArr(vector<int>* vec) {
+    int* arr = new int[vec->size()];
+    for (int i = 0; i < vec->size(); i++) {
+        arr[i] = vec->at(i);
+    }
+    return arr;
 }
 
 void sortArray(int type, int count, int* numbers) {
@@ -29,9 +53,11 @@ void sortArray(int type, int count, int* numbers) {
             writeFile(count, heapSort(count, numbers));
         } else if (type == 2) {
             writeFile(count, mergeSort(count, numbers));
-        } else if (type == 2) {
         } else if (type == 3) {
-            // Quick
+            vector<int> *vec = arrToVec(count, numbers);
+            vec = quickSort(count, vec);
+            int* arr = vecToArr(vec);
+            writeFile(count, arr);
         } else {
             // Invalid
         }
@@ -61,6 +87,7 @@ int* parseFile(string filename) {
         arr[i] = number;
         i++;
     }
+    fin.close();
     return arr;
 }
 

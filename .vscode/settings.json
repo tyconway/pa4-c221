@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "cstddef": "cpp",
+        "fstream": "cpp",
+        "ios": "cpp",
+        "memory": "cpp",
+        "string": "cpp",
+        "system_error": "cpp",
+        "vector": "cpp",
+        "xlocale": "cpp",
+        "xlocnum": "cpp",
+        "xmemory": "cpp",
+        "xstring": "cpp"
+    }
+}
