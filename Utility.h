@@ -91,4 +91,15 @@ int* parseFile(string filename) {
     return arr;
 }
 
+void sortFromFile(string filename) {
+    int* data = parseFile(filename);
+    int type = data[0];
+    int count = data[1];
+    int* numbers = new int[count];
+    for (int index = 0; index < count; index++) {
+        numbers[index] = data[index + 2];
+    }
+    sortArray(type, count, numbers);
+}
+
 #endif
