@@ -8,7 +8,7 @@ void swapBubble(int left, int right, int* arr) {
     arr[right] = temp;
 }
 
-int* bubbleSort(int count, int* numbers) {
+int* BubbleSort(int count, int* numbers) {
     int unsorted = count - 1;
     bool swapped = false;
     do {

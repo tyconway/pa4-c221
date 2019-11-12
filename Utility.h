@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <exception>
+#include <chrono>
 #include "bubblesort.h"
 #include "heapsort.h"
 #include "mergesort.h"
@@ -48,14 +49,14 @@ void sortArray(int type, int count, int* numbers) {
     // }
     try {
         if (type == 0) {
-            writeFile(count, bubbleSort(count, numbers));
+            writeFile(count, BubbleSort(count, numbers));
         } else if (type == 1) {
-            writeFile(count, heapSort(count, numbers));
+            writeFile(count, HeapSort(count, numbers));
         } else if (type == 2) {
-            writeFile(count, mergeSort(count, numbers));
+            writeFile(count, MergeSort(count, numbers));
         } else if (type == 3) {
             vector<int> *vec = arrToVec(count, numbers);
-            vec = quickSort(count, vec);
+            vec = QuickSort(count, vec);
             int* arr = vecToArr(vec);
             writeFile(count, arr);
         } else {
@@ -104,19 +105,18 @@ void sortFromFile(string filename) {
 
 enum listType { random, increasing, decreasing };
 
-void timedSort(int n = 1000, string selectedType = "random") {
-    // Try to match type
-    listType type;
-    if (selectedType == "random") {
-        type = random;
-    } else if (selectedType == "increasing") {
-        type = increasing;
-    } else if (selectedType == "decreasing") {
-        type = decreasing;
-    } else {
-        cout << "Bad type.";
-        return;
-    }
+void log_csv(string filename, chrono::duration<double, nano> elapsed, int currPushCount)
+{
+    double microsecondsDenominator = 1000; 
+    double elapsed_time = elapsed.count()/microsecondsDenominator;
+    ofstream ofs;
+    string csv_filename = "logs/" + filename + ".csv";
+    ofs.open(csv_filename, ios::app);
+    ofs << currPushCount << "," << elapsed_time << "\n";
+    ofs.close();
+}
+
+int* generateList(int n, listType type) {
     // generate requested type
     int* numbers = new int[n];
     switch(type) {
@@ -137,8 +137,60 @@ void timedSort(int n = 1000, string selectedType = "random") {
             }
             break;
     }
+    return numbers;
+}
+
+void timedSort(int n = 1000, string selectedType = "random") {
+    // Try to match type
+    listType type;
+    printf("Parsing type");
+    if (selectedType == "random") {
+        type = random;
+    } else if (selectedType == "increasing") {
+        type = increasing;
+    } else if (selectedType == "decreasing") {
+        type = decreasing;
+    } else {
+        cout << "Bad type.";
+        return;
+    }
+    printf(", done.\n");
     // time trials
-    // generate log_csv
+    printf("Starting time trials, ");
+    auto start = chrono::high_resolution_clock::now();
+    auto curr = chrono::high_resolution_clock::now();
+    auto elapsed = curr - start;
+    for (int trial = 0; trial <= n; trial += (n / 100)) {
+        int* numbers = generateList(trial, type);
+
+        start = chrono::high_resolution_clock::now();
+        int* sortedBubble = BubbleSort(trial, numbers);
+        curr = chrono::high_resolution_clock::now();
+        elapsed = curr - start;
+        log_csv(selectedType + "_bubble", elapsed, trial);
+
+        start = chrono::high_resolution_clock::now();
+        int* sortedHeap = HeapSort(trial, numbers);
+        curr = chrono::high_resolution_clock::now();
+        elapsed = curr - start;
+        log_csv(selectedType + "_heap", elapsed, trial);
+
+        start = chrono::high_resolution_clock::now();
+        int* sortedMerge = MergeSort(trial, numbers);
+        curr = chrono::high_resolution_clock::now();
+        elapsed = curr - start;
+        log_csv(selectedType + "_merge", elapsed, trial);
+
+        // Convert numbers to vector
+        vector<int>* vector = arrToVec(trial, numbers);
+        start = chrono::high_resolution_clock::now();
+        vector = QuickSort(trial, vector);
+        curr = chrono::high_resolution_clock::now();
+        elapsed = curr - start;
+        log_csv(selectedType + "_quick", elapsed, trial);
+        cout << "\r" << "Running time trials, " << trial;
+    }
+    cout << "\r" << "Running time trials, done.\n";
 }
 
 #endif

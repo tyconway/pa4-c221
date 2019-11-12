@@ -40,14 +40,14 @@ vector<int>* concatenate(vector<int>* L, vector<int>* E, vector<int>* G) {
     return L;
 }
 
-vector<int>* quickSort(int count, vector<int>* numbers) {
+vector<int>* QuickSort(int count, vector<int>* numbers) {
     if (numbers->size() <= 1) {
         return numbers;
     }
     int randomIndex = (rand() % count);
     Partitions *parts = partition(numbers, randomIndex);
-    vector<int>* sortedL = quickSort(parts->L->size(), parts->L);
-    vector<int>* sortedG = quickSort(parts->G->size(), parts->G);
+    vector<int>* sortedL = QuickSort(parts->L->size(), parts->L);
+    vector<int>* sortedG = QuickSort(parts->G->size(), parts->G);
     numbers = concatenate(sortedL, parts->E, sortedG);
     return numbers;
 }

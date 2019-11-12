@@ -52,13 +52,13 @@ int* merge(int* left, int leftCount, int* right, int rightCount, int count) {
     return merged;
 }
 
-int* mergeSort(int count, int* numbers) {
+int* MergeSort(int count, int* numbers) {
     if (count > 1) {
         int* r = new int[count];
         int* leftHalf = firstHalf(count, numbers);
         int* rightHalf = lastHalf(count, numbers);
-        int *leftHalfSorted = mergeSort(count/2, leftHalf);
-        int *rightHalfSorted = mergeSort(count - count/2, rightHalf);
+        int *leftHalfSorted = MergeSort(count/2, leftHalf);
+        int *rightHalfSorted = MergeSort(count - count/2, rightHalf);
         r = merge(leftHalfSorted, count/2, rightHalfSorted, count - count/2, count);
         return r;
     }

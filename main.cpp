@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
     cout << endl;
-
+    printf("<For use help, see README.>\n\n");
     srand(time(0));
     if (argc == 1) {
         sortFromFile("numbers.txt");
