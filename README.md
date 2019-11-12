@@ -5,7 +5,7 @@
 The executable performs two functions:
 ## Reads text from a file:
 ```
-./a.exe numbers.txt
+./a.exe <filename.txt>
 ```
 If no filename is specified, `numbers.txt` will be assumed.
 
