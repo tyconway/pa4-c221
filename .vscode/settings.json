@@ -10,6 +10,7 @@
         "xlocale": "cpp",
         "xlocnum": "cpp",
         "xmemory": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "chrono": "cpp"
     }
 }

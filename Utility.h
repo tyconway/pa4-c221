@@ -107,8 +107,8 @@ enum listType { random, increasing, decreasing };
 
 void log_csv(string filename, chrono::duration<double, nano> elapsed, int currPushCount)
 {
-    double microsecondsDenominator = 1000; 
-    double elapsed_time = elapsed.count()/microsecondsDenominator;
+    double millisecondsDenominator = 1000000; 
+    double elapsed_time = elapsed.count()/millisecondsDenominator;
     ofstream ofs;
     string csv_filename = "logs/" + filename + ".csv";
     ofs.open(csv_filename, ios::app);
@@ -143,7 +143,7 @@ int* generateList(int n, listType type) {
 void timedSort(int n = 1000, string selectedType = "random") {
     // Try to match type
     listType type;
-    printf("Parsing type");
+    // printf("Parsing type");
     if (selectedType == "random") {
         type = random;
     } else if (selectedType == "increasing") {
@@ -154,13 +154,14 @@ void timedSort(int n = 1000, string selectedType = "random") {
         cout << "Bad type.";
         return;
     }
-    printf(", done.\n");
+    // printf(", done.\n");
     // time trials
-    printf("Starting time trials, ");
+    // printf("Starting time trials, ");
     auto start = chrono::high_resolution_clock::now();
     auto curr = chrono::high_resolution_clock::now();
     auto elapsed = curr - start;
-    for (int trial = 0; trial <= n; trial += (n / 100)) {
+    // for (int trial = 0; trial <= n; trial += (n / 100)) {
+        int trial = n;
         int* numbers = generateList(trial, type);
 
         start = chrono::high_resolution_clock::now();
@@ -188,9 +189,9 @@ void timedSort(int n = 1000, string selectedType = "random") {
         curr = chrono::high_resolution_clock::now();
         elapsed = curr - start;
         log_csv(selectedType + "_quick", elapsed, trial);
-        cout << "\r" << "Running time trials, " << trial;
-    }
-    cout << "\r" << "Running time trials, done.\n";
+        // cout << "\r" << "Running time trials, " << trial;
+    // }
+    // cout << "\r" << "Running time trials, done.\n";
 }
 
 #endif

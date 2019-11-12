@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm ./logs/*
+echo Clearing logs.
+g++ main.cpp
+echo Compiling main.
+for value in {0..500000..5000}
+do
+	echo -e '\r'$value | tr -d '\n'
+	./a.exe test $value random | tr -d '\n'
+	./a.exe test $value increasing | tr -d '\n'
+	./a.exe test $value decreasing | tr -d '\n'
+done
+echo Done.
