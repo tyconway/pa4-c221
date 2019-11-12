@@ -9,6 +9,16 @@ The executable performs two functions:
 ```
 If no filename is specified, `numbers.txt` will be assumed.
 
+Note: the file must be formatted according:
+```
+<sorting id> // 0: bubble, 1: heap, 2: merge, 3: quick
+<count>
+1
+2
+3
+...
+```
+
 ## Times the sorting algorithms:
 ```
 ./a.exe test <count> <type>
