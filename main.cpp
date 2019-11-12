@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
         timedSort(stoi(string(argv[2])), string(argv[3]));
     }
     else if (argc == 2) {
-        cout << "Sorting from " << string(argv[1]) << endl;
+        cout << "Sorting from " << string(argv[1]);
         sortFromFile(string(argv[1]));
     } else {
         cout << "Invalid input.\n";
